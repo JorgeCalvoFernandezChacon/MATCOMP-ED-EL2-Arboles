@@ -17,5 +17,7 @@ public class Main {
         System.out.println("ÓRDEN CENTRAL:");
         arbol.getListaOrdenCentral();
         System.out.println("");
+        System.out.println("El grado del árbol es:" + arbol.getGrado());
+        System.out.println("La altura del árbol es:" + arbol.getAltura());
     }
 }

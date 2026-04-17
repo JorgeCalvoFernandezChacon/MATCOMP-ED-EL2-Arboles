@@ -48,4 +48,29 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
         }
 
     }
+    public int getGrado(){return Grado(this.inicial);}
+
+    public int Grado(NodoArbol<T> nodo){
+        if(nodo == null) return 0;
+        int gradoActual = 0;
+        if(nodo.getNodoIzq() != null) gradoActual++;
+        if(nodo.getNodoDer() != null) gradoActual++;
+        int gradoIzq = Grado(nodo.getNodoIzq());
+        int gradoDer = Grado(nodo.getNodoDer());
+
+        return Math.max(gradoActual, Math.max(gradoIzq, gradoDer));
+    }
+    public int getAltura(){return altura(this.inicial);}
+
+    public int altura(NodoArbol<T> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+
+        int alturaIzq = altura(nodo.getNodoIzq());
+        int alturaDer = altura(nodo.getNodoDer());
+
+        return 1 + Math.max(alturaIzq, alturaDer);
+    }
+
 }
