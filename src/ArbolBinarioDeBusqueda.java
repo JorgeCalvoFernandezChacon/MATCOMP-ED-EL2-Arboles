@@ -4,10 +4,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
-    private NodoArbol<T> inicial = null;
+    protected NodoArbol<T> inicial = null;
+
+    public ArbolBinarioDeBusqueda(){}
 
     public ArbolBinarioDeBusqueda(NodoArbol<T> nodo){
         this.inicial = nodo;
+    }
+
+    public NodoArbol<T> getInicial() {
+        return this.inicial;
     }
 
     public void add(T elemento) {
