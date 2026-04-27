@@ -1,21 +1,47 @@
-import java.util.ArrayList;
+import EstructurasDeDatos.Cola;
+import EstructurasDeDatos.Pila;
+
 import java.util.Collections;
-import java.util.List;
+import java.util.Random;
+
 
 public class MainEnterosDesordenados {
     public static void main(String[] args) {
         ArbolBinarioDeBusquedaEnteros arbol = new ArbolBinarioDeBusquedaEnteros(null);
 
         // 1. Crear lista de 0 a 128 y desordenarla
-        List<Integer> numeros = new ArrayList<>();
+        Cola<Integer> cola = new Cola<>();
+        Random r = new Random();
         for (int i = 0; i <= 128; i++) {
-            numeros.add(i);
+            cola.enqueue(i);
+        } // Mezcla aleatoria
+        Cola<Integer> mezcla = new Cola<>();
+
+        while (!cola.vacia()) {
+
+            int size = cola.tamañoLista();
+            int pos = r.nextInt(size);
+
+            Cola<Integer> temp = new Cola<>();
+            Integer elegido = null;
+
+            for (int i = 0; i < size; i++) {
+                Integer x = cola.dequeue();
+
+                if (i == pos) {
+                    elegido = x;
+                } else {
+                    temp.enqueue(x);
+                }
+            }
+
+            cola = temp;
+            mezcla.enqueue(elegido);
         }
-        Collections.shuffle(numeros); // Mezcla aleatoria
 
         // 2. Añadir al árbol
-        for (Integer n : numeros) {
-            arbol.add(n);
+        while (!mezcla.vacia()) {
+            arbol.add(mezcla.dequeue());
         }
 
         // 3. Calcular suma
@@ -37,8 +63,28 @@ public class MainEnterosDesordenados {
         // 5. Altura y Caminos
         System.out.println("6. Altura del árbol: " + arbol.getAltura());
 
-        List<Integer> camino = arbol.getCamino(110);
-        System.out.println("7. Camino al 110: " + camino);
-        System.out.println("8. Longitud del camino: " + (camino.size() - 1));
+        Pila<Integer> camino = arbol.getCamino(110);
+        Pila<Integer> auxiliar = new Pila<>();
+        Pila<Integer> auxiliar2 = new Pila<>();
+
+// Pasamos todo de la pila 'camino' a 'auxiliar' (esto invierte el orden)
+        while(!camino.vacia()){
+            int X = camino.pop();
+            auxiliar.push(X);
+            auxiliar2.push(X);
+        }
+        System.out.print("7. Camino al 110 (Raíz a Destino): ");
+        // 2. Imprimimos 'auxiliar'
+        while(!auxiliar.vacia()){
+            Integer actual = auxiliar.pop();
+            System.out.print(actual);
+
+            // Un toque estético: solo ponemos la flecha si no es el último
+            if (!auxiliar.vacia()) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("8. Longitud del camino: " + (auxiliar2.tamañoLista() - 1));
     }
 }

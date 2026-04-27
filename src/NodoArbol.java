@@ -25,23 +25,22 @@ public class NodoArbol<T extends Comparable<T>> {
         this.nodo = nodo;
     }
 
-    public void insertar(T nuevoNodo) {
-        if (nuevoNodo.compareTo(this.nodo) < 0) {
+    public void insertar(T nuevoDato) {
+        if (nuevoDato.compareTo(this.nodo) < 0) {
+            // Si es menor, va a la IZQUIERDA
             if (this.nodoIzq == null) {
-                this.nodoIzq = new NodoArbol<T>(nuevoNodo);
+                this.nodoIzq = new NodoArbol<>(nuevoDato);
             } else {
-                this.nodoIzq.insertar(nuevoNodo);
+                this.nodoIzq.insertar(nuevoDato);
             }
-        }
-
-        if (nuevoNodo.compareTo(this.nodo) > 0) {
+        } else if (nuevoDato.compareTo(this.nodo) > 0) {
+            // Si es mayor, va a la DERECHA
             if (this.nodoDer == null) {
-                this.nodoDer = new NodoArbol<T>(nuevoNodo);
+                this.nodoDer = new NodoArbol<>(nuevoDato);
             } else {
-                this.nodoDer.insertar(nuevoNodo);
+                this.nodoDer.insertar(nuevoDato);
             }
         }
-
     }
 }
 

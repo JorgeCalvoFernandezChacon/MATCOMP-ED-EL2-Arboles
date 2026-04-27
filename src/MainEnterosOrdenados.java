@@ -1,3 +1,7 @@
+import EstructurasDeDatos.Cola;
+import EstructurasDeDatos.ListaSE;
+import EstructurasDeDatos.Pila;
+
 public class MainEnterosOrdenados{
     public static void main(String[] args) {
         // Creamos la instancia de la clase específica para enteros
@@ -38,8 +42,28 @@ public class MainEnterosOrdenados{
         System.out.println("6. Altura del árbol: " + arbol.getAltura());
 
         // 6. Camino al valor 110
-        java.util.List<Integer> camino = arbol.getCamino(110);
-        System.out.println("7. Camino al 110: " + camino);
-        System.out.println("8. Longitud del camino: " + (camino.size() - 1));
+        Pila<Integer> camino = arbol.getCamino(15);
+        Pila<Integer> auxiliar = new Pila<>();
+        Pila<Integer> auxiliar2 = new Pila<>();
+
+// Pasamos todo de la pila 'camino' a 'auxiliar' (esto invierte el orden)
+        while(!camino.vacia()){
+            int X = camino.pop();
+            auxiliar.push(X);
+            auxiliar2.push(X);
+        }
+        System.out.print("7. Camino al 110 (Raíz a Destino): ");
+        // 2. Imprimimos 'auxiliar'
+        while(!auxiliar.vacia()){
+            Integer actual = auxiliar.pop();
+            System.out.print(actual);
+
+            // Un toque estético: solo ponemos la flecha si no es el último
+            if (!auxiliar.vacia()) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("8. Longitud del camino: " + (auxiliar2.tamañoLista() - 1));
     }
 }

@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Queue;
+import EstructurasDeDatos.Cola;
+import EstructurasDeDatos.Pila;
+
 
 public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
     protected NodoArbol<T> inicial = null;
@@ -35,7 +34,6 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
             this.preorden(nodo.getNodoDer());
             this.preorden(nodo.getNodoIzq());
         }
-
     }
 
     public void getListaPostOrden() {
@@ -87,19 +85,19 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 
         return 1 + Math.max(alturaIzq, alturaDer);
     }
-    public List<T> getListaDatosNivel(int nivel){
-        List<T> resultado = new ArrayList<>();
+    public Cola<T> getListaDatosNivel(int nivel){
+        Cola<T> resultado = new Cola<>();
         ListaDatosNivel(this.inicial, nivel, resultado);
         return resultado;
     }
-    public void ListaDatosNivel(NodoArbol<T> nodo, int Nivelactual, List<T> lista){
+    public void ListaDatosNivel(NodoArbol<T> nodo, int Nivelactual, Cola<T> lista){
         // Si el nodo está vacío no se hace nada
         if(nodo == null){
             return;
         }
         // Si llegamos al nivel deseado, se añaden los números
         if(Nivelactual == 0){
-            lista.add(nodo.getNodo());
+            lista.enqueue(nodo.getNodo());
         // Si no, seguimos recorriendo ambas ramas de los nodos hasta llegar al nivel pedido
         }else{
             ListaDatosNivel(nodo.getNodoIzq(),Nivelactual -1, lista);
@@ -162,13 +160,13 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
             return true; // Un árbol vacío se considera casi completo
         }
 
-        Queue<NodoArbol<T>> cola = new LinkedList<>();
-        cola.add(this.inicial);
+        Cola<NodoArbol<T>> cola = new Cola<>();
+        cola.enqueue(this.inicial);
 
         boolean encontradoNulo = false;
 
-        while (!cola.isEmpty()) {
-            NodoArbol<T> actual = cola.poll();
+        while (!cola.vacia()) {
+            NodoArbol<T> actual = cola.dequeue();
 
             if (actual == null) {
                 // A partir de aquí, no deberíamos ver más nodos reales
@@ -180,36 +178,48 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
 
                 // Añadimos los hijos a la cola (incluyendo los null)
                 // Primero el izquierdo y luego el derecho
-                cola.add(actual.getNodoIzq());
-                cola.add(actual.getNodoDer());
+                cola.enqueue(actual.getNodoIzq());
+                cola.enqueue(actual.getNodoDer());
             }
         }
 
         return true;
     }
-    public List<T> getCamino(T numero){
-        List<T> resultado = new ArrayList<>();
-        camino(this.inicial,numero, resultado);
+    public Pila<T> getCamino(T numero) {
+        Pila<T> resultado = new Pila<>();
+        // Es importante manejar el caso de que el árbol esté vacío
+        if (this.inicial != null) {
+            camino(this.inicial, numero, resultado);
+        }
         return resultado;
     }
-    public void camino(NodoArbol<T> nodo, T numero, List<T> lista){
-        // Caso base
+
+    public boolean camino(NodoArbol<T> nodo, T numero, Pila<T> pila) {
         if (nodo == null) {
-            return;
+            return false;
         }
-        // Añadimos el nodo actual al camino
-        lista.add(nodo.getNodo());
-        // Comparamos
-        int comparacion = numero.compareTo(nodo.getNodo());
-        if (comparacion == 0) {
-            return;
-        } else if (comparacion < 0) {
-            // El número buscado es MENOR, vamos a la IZQUIERDA
-            camino(nodo.getNodoIzq(), numero, lista);
+        // 1. Agregamos el nodo actual al camino potencial
+        pila.push(nodo.getNodo());
+
+        // 2. Comparamos
+        int cmp = numero.compareTo(nodo.getNodo());
+
+        // CASO BASE: Lo encontramos
+        if (cmp == 0) {
+            return true;
+        }
+        // 3. Búsqueda recursiva basada en la propiedad del BST
+        boolean encontrado = false;
+        if (cmp < 0) {
+            encontrado = camino(nodo.getNodoIzq(), numero, pila);
         } else {
-            // El número buscado es MAYOR, vamos a la DERECHA
-            camino(nodo.getNodoDer(), numero, lista);
+            encontrado = camino(nodo.getNodoDer(), numero, pila);
         }
+        // 4. BACKTRACKING: Si no se encontró en esta rama, lo sacamos de la pila
+        if (!encontrado) {
+            pila.pop();
+        }
+        return encontrado;
     }
     public ArbolBinarioDeBusqueda<T> getSubArbolIzquierda(){
         return SubArbolIzquierda(this.inicial);
