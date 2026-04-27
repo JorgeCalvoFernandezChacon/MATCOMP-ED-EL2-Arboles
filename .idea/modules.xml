@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../EntregablesJorgeEDD/src/EstructurasDeDatos/EstructurasDeDatos.iml" filepath="$PROJECT_DIR$/../EntregablesJorgeEDD/src/EstructurasDeDatos/EstructurasDeDatos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Grafos.iml" filepath="$PROJECT_DIR$/Grafos.iml" />
       <module fileurl="file://$PROJECT_DIR$/MatComp-ED-EL2-Arboles.iml" filepath="$PROJECT_DIR$/MatComp-ED-EL2-Arboles.iml" />
     </modules>
   </component>
