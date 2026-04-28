@@ -1,0 +1,20 @@
+{
+  "tipos": ["persona", "premio", "libro"],
+  "tripletas": [
+    {
+      "s": "persona:Albert Einstein",
+      "p": "gano",
+      "o": "premio:Nobel"
+    },
+    {
+      "s": "persona:Albert Einstein",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "libro:Don Quijote",
+      "p": "autor",
+      "o": "persona:Cervantes"
+    }
+  ]
+}

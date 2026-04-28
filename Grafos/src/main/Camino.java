@@ -23,7 +23,7 @@ public class Camino<T> {
             return "El camino está vacío.";
         }
 
-        int tamano = this.getCamino().tamañoLista();
+        int tamano = this.getCamino().size();
         // 2. Obtener el ORIGEN (está al frente)
         T origen = this.getCamino().peek().data;
         T destino = null;

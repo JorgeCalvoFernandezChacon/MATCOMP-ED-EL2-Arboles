@@ -1,0 +1,80 @@
+{
+  "tipos": ["persona", "lugar", "pais", "premio", "ciencia", "universidad"],
+  "tripletas": [
+    {
+      "s": "persona:Albert Einstein",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "lugar:Ulm",
+      "p": "esta_en",
+      "o": "pais:Alemania"
+    },
+    {
+      "s": "persona:Albert Einstein",
+      "p": "estudio_en",
+      "o": "universidad:ETH Zurich"
+    },
+    {
+      "s": "universidad:ETH Zurich",
+      "p": "ubicada_en",
+      "o": "lugar:Zurich"
+    },
+    {
+      "s": "lugar:Zurich",
+      "p": "esta_en",
+      "o": "pais:Suiza"
+    },
+    {
+      "s": "persona:Albert Einstein",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "nace_en",
+      "o": "lugar:Varsovia"
+    },
+    {
+      "s": "lugar:Varsovia",
+      "p": "esta_en",
+      "o": "pais:Polonia"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "trabajo_en",
+      "o": "lugar:Paris"
+    },
+    {
+      "s": "lugar:Paris",
+      "p": "esta_en",
+      "o": "pais:Francia"
+    },
+    {
+      "s": "persona:Isaac Newton",
+      "p": "nace_en",
+      "o": "lugar:Woolsthorpe"
+    },
+    {
+      "s": "lugar:Woolsthorpe",
+      "p": "esta_en",
+      "o": "pais:Reino Unido"
+    },
+    {
+      "s": "ciencia:Relatividad",
+      "p": "creada_por",
+      "o": "persona:Albert Einstein"
+    },
+    {
+      "s": "ciencia:Gravedad",
+      "p": "descubierta_por",
+      "o": "persona:Isaac Newton"
+    }
+  ]
+}
