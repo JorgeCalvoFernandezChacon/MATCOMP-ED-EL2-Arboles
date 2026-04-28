@@ -1,0 +1,70 @@
+{
+  "tipos": ["persona", "lugar", "premio", "categoria"],
+  "tripletas": [
+    {
+      "s": "persona:Albert Einstein",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "persona:Albert Einstein",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "nace_en",
+      "o": "lugar:Varsovia"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    },
+    {
+      "s": "persona:Marie Curie",
+      "p": "gano",
+      "o": "premio:Nobel de Quimica"
+    },
+    {
+      "s": "persona:Gabriel Garcia Marquez",
+      "p": "nace_en",
+      "o": "lugar:Aracataca"
+    },
+    {
+      "s": "persona:Gabriel Garcia Marquez",
+      "p": "gano",
+      "o": "premio:Nobel de Literatura"
+    },
+    {
+      "s": "persona:Santiago Ramon y Cajal",
+      "p": "nace_en",
+      "o": "lugar:Petilla de Aragon"
+    },
+    {
+      "s": "persona:Santiago Ramon y Cajal",
+      "p": "gano",
+      "o": "premio:Nobel de Medicina"
+    },
+    {
+      "s": "persona:Nelson Mandela",
+      "p": "nace_en",
+      "o": "lugar:Mvezo"
+    },
+    {
+      "s": "persona:Nelson Mandela",
+      "p": "gano",
+      "o": "premio:Nobel de la Paz"
+    },
+    {
+      "s": "persona:Max von Laue",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "persona:Max von Laue",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    }
+  ]
+}

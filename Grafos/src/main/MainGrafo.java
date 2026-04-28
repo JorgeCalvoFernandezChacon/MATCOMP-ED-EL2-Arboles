@@ -68,5 +68,74 @@ public class MainGrafo {
             Camino<String> resultado4 = miGrafojunto.obtenerCaminoDijkstra(inicio2, fin2);
             System.out.println(resultado4.toString());
         }
+        Grafo<String> miGrafoEinstein = new Grafo<>();
+        // 1. Cargamos el grafo con el JSON de arriba
+        miGrafoEinstein.cargarGrafoDesdeJson("C:\\Users\\jcalv\\IdeaProjects\\MATCOMP-ED-EL2-Arboles\\Grafos\\src\\main\\Nobel");
+
+// 2. Lógica para responder la pregunta:
+        Vertice<String> einstein = miGrafoEinstein.buscarVertice("persona:Albert Einstein");
+
+// Buscamos la ciudad de Einstein explorando sus arcos
+        String ciudadEinstein = "";
+        int numArcos = einstein.arcosSalida.size();
+        for (int i = 0; i < numArcos; i++) {
+            Arco<String> arco = einstein.arcosSalida.dequeue();
+            if (arco.etiqueta.equals("nace_en")) {
+                ciudadEinstein = arco.destino.data;
+            }
+            einstein.arcosSalida.enqueue(arco); // No olvidar rotar
+        }
+
+        System.out.println("Einstein nació en: " + ciudadEinstein);
+
+// 3. Ahora buscamos quién más nació allí
+        Vertice<String> ciudad = miGrafoEinstein.buscarVertice(ciudadEinstein);
+
+        int numEntrada = ciudad.arcosEntrada.size();
+        for (int i = 0; i < numEntrada; i++) {
+            Arco<String> arco = ciudad.arcosEntrada.dequeue();
+            if (!arco.origen.data.equals("persona:Albert Einstein")) {
+                System.out.println("Otro famoso que nació en " + ciudadEinstein + " es: " + arco.origen.data);
+            }
+            ciudad.arcosEntrada.enqueue(arco);
+        }
+        Grafo<String> miGrafoNacimiento = new Grafo<>();
+        miGrafoNacimiento.cargarGrafoDesdeJson("C:\\Users\\jcalv\\IdeaProjects\\MATCOMP-ED-EL2-Arboles\\Grafos\\src\\main\\NacimientoNobel");
+
+        // 2. AÑADIR LA TRIPLETA DE ANTONIO (Como pide el ejercicio)
+        miGrafoNacimiento.cargarTripleta("persona:Antonio", "nace_en", "lugar:Villarrubia de los Caballeros");
+
+        System.out.println("--- Informe de Nacimientos Nobel ---");
+
+        // 3. TU BUCLE DE BÚSQUEDA
+        for (int i = 0; i < miGrafoNacimiento.vertices.size(); i++) {
+            Vertice<String> v = miGrafoNacimiento.vertices.get(i);
+
+            if (v.data.startsWith("persona:")) {
+                boolean esNobel = false;
+                String lugarNacimiento = "Desconocido";
+
+                int numArcos2 = v.arcosSalida.size();
+                for (int j = 0; j < numArcos2; j++) {
+                    Arco<String> arco = v.arcosSalida.dequeue();
+
+                    // Verificamos si la etiqueta es "gano" y el destino es un Nobel
+                    if (arco.etiqueta.equals("gano") && arco.destino.data.contains("premio:Nobel")) {
+                        esNobel = true;
+                    }
+                    // Guardamos el lugar si la etiqueta es "nace_en"
+                    if (arco.etiqueta.equals("nace_en")) {
+                        lugarNacimiento = arco.destino.data;
+                    }
+
+                    v.arcosSalida.enqueue(arco); // Rotación obligatoria
+                }
+
+                // Solo imprimimos si se confirmó que es Nobel
+                if (esNobel) {
+                    System.out.println("El laureado " + v.data + " nació en: " + lugarNacimiento);
+                }
+            }
+        }
     }
 }

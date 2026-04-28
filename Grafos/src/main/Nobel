@@ -1,0 +1,20 @@
+{
+  "tipos": ["persona", "lugar", "premio"],
+  "tripletas": [
+    {
+      "s": "persona:Albert Einstein",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "persona:Max von Laue",
+      "p": "nace_en",
+      "o": "lugar:Ulm"
+    },
+    {
+      "s": "persona:Max von Laue",
+      "p": "gano",
+      "o": "premio:Nobel de Fisica"
+    }
+  ]
+}
