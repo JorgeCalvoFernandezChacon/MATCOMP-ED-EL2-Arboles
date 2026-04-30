@@ -1,0 +1,9 @@
+·Las principales diferencias entre los programas de prueba son dos:
+-En primer lugar, la búsqueda de camino, ya que en el árbol desordenado, al elegir como raíz un número aleatorio, los caminos no son ordenados, por otro
+lado, en el árbol ordenado, solo hay un camino, desde la raíz hasta el número elegido, pasando por todos los números naturales que hay entre ellos.
+-Otra diferencia es la altura del grafo, ya que el grafo ordenado tiene una altura de 129 niveles, mientras que el grafo desordenado
+tiene una altura variada.
+
+·Lo que sucede con los resultados en los dos programas de prueba:
+-En el árbol ordenado, no sucede nada, ya que los resultados serán siempre idénticos.
+-En el árbol desordenado, la suma total seguirá siendo la misma, pero la altura y el camino al 110 cambiarán, ya que el árbol será diferente.

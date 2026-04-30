@@ -59,7 +59,6 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
             System.out.print(String.valueOf(nodo.getNodo()) + ",");
             this.ordencentral(nodo.getNodoDer());
         }
-
     }
     public int getGrado(){return Grado(this.inicial);}
 

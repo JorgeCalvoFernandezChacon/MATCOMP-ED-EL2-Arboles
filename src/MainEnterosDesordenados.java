@@ -1,7 +1,5 @@
 import EstructurasDeDatos.Cola;
 import EstructurasDeDatos.Pila;
-
-import java.util.Collections;
 import java.util.Random;
 
 
@@ -19,7 +17,7 @@ public class MainEnterosDesordenados {
 
         while (!cola.vacia()) {
 
-            int size = cola.tamañoLista();
+            int size = cola.size();
             int pos = r.nextInt(size);
 
             Cola<Integer> temp = new Cola<>();
