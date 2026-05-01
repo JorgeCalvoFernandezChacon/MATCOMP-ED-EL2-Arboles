@@ -214,7 +214,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> {
         } else {
             encontrado = camino(nodo.getNodoDer(), numero, pila);
         }
-        // 4. BACKTRACKING: Si no se encontró en esta rama, lo sacamos de la pila
+        // 4. Si no se encontró en esta rama, lo sacamos de la pila
         if (!encontrado) {
             pila.pop();
         }

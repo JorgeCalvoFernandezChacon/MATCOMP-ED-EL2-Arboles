@@ -14,6 +14,7 @@ public class Grafo<T> {
         arco.origen.addOutEdge(arco);
         arco.destino.addInEdge(arco);
 
+        // Hacemos que el arco vaya en los dos sentidos, para que el grafo sea no dirigido
         Arco<T> inverso = new Arco<>(arco.destino, arco.origen, arco.coste, arco.etiqueta + "_inv");
         arco.destino.addOutEdge(inverso);
         arco.origen.addInEdge(inverso);
@@ -29,10 +30,10 @@ public class Grafo<T> {
             return new Camino<>(soloUno, 0.0);
         }
 
-        // 1. Preparar todos los vértices (Reset)
+        // 1. Preparar todos los vértices
         resetearPropiedades();
 
-        // 2. BFS: Usamos una Cola para explorar por niveles (anchura)
+        // 2. Usamos una Cola para buscar en anchura
         Cola<Vertice<T>> colaExploracion = new Cola<>();
 
         inicio.visitado = true;
@@ -43,7 +44,7 @@ public class Grafo<T> {
 
         while (!colaExploracion.vacia()) {
             Vertice<T> actual = colaExploracion.dequeue();
-
+            // Cuando encontremos el nodo paramos
             if (actual == fin) {
                 encontrado = true;
                 break;
@@ -57,7 +58,7 @@ public class Grafo<T> {
 
                 if (!vecino.visitado) {
                     vecino.visitado = true;
-                    // La distancia lógica sigue siendo por saltos para el BFS
+                    // La distancia lógica es por saltos
                     vecino.distancia = actual.distancia + 1;
 
                     vecino.costeAcumulado = actual.costeAcumulado + arco.coste;
@@ -81,7 +82,6 @@ public class Grafo<T> {
 
     private void resetearPropiedades() {
         // Recorrer la lista de vértices y limpiar datos de búsquedas anteriores
-        // Asumiendo que tu ListaSE se puede recorrer por índice
         for (int i = 0; i < vertices.size(); i++) {
             Vertice<T> v = vertices.get(i);
             v.visitado = false;
@@ -105,7 +105,6 @@ public class Grafo<T> {
 
         // Ahora los pasamos a una Cola en el orden correcto (Origen a Destino)
         Cola<Vertice<T>> colaCamino = new Cola<>();
-        // Asumiendo que 'get(i)' de tu ListaSE funciona:
         for (int i = listaTemporal.size() - 1; i >= 0; i--) {
             colaCamino.enqueue(listaTemporal.get(i));
         }
@@ -136,7 +135,7 @@ public class Grafo<T> {
 
             if (u == fin) break; // Ya llegamos al destino de forma óptima
 
-            // 3. Relajación de aristas (usando tu lógica de rotación de cola)
+            // 3. Relajación de aristas
             int numArcos = u.arcosSalida.size();
             for (int j = 0; j < numArcos; j++) {
                 Arco<T> arco = u.arcosSalida.dequeue();
@@ -154,12 +153,12 @@ public class Grafo<T> {
             }
         }
 
-        // 4. Reconstrucción del camino (usando tu método crearObjetoCamino)
+        // 4. Reconstrucción del camino
         if (fin.costeAcumulado == Double.MAX_VALUE) return null;
         return crearObjetoCamino(fin);
     }
 
-    // Método auxiliar para suplir la falta de PriorityQueue
+
     private Vertice<T> buscarMinimoNoVisitado() {
         Vertice<T> minVertice = null;
         double minValor = Double.MAX_VALUE;
@@ -190,7 +189,7 @@ public class Grafo<T> {
             Vertice<T> actual = q.dequeue();
             visitadosCount++;
 
-            // Recorrer vecinos (con tu lógica de rotación de cola)
+            // Recorrer vecinos
             int n = actual.arcosSalida.size();
             for (int i = 0; i < n; i++) {
                 Arco<T> a = actual.arcosSalida.dequeue();
@@ -249,7 +248,7 @@ public class Grafo<T> {
         }
     }
 
-    // Método auxiliar para limpiar las comillas y comas del JSON manual
+    // Método para limpiar las comillas y comas del JSON manual
     private String extraerValorJson(String linea) {
         String[] partes = linea.split(":");
         if (partes.length < 2) return "";
